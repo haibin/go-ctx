@@ -54,6 +54,6 @@ func final(w http.ResponseWriter, r *http.Request) {
 func main() {
 	finalHandler := http.HandlerFunc(final)
 
-	http.Handle("/", middlewareOne(middlewareTwo(middlewareThree(finalHandler))))
+	http.Handle("/", gorillaCtx.ClearHandler(middlewareOne(middlewareTwo(middlewareThree(finalHandler)))))
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
